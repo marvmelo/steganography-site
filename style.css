@@ -1,0 +1,48 @@
+body {
+    background-color: antiquewhite;
+}
+
+canvas {
+    display: none;
+}
+
+.divTable {
+    display: flex;
+    width: 600px;
+    height: 210px;
+}
+
+.divColumn {
+    float: left;
+    width: 33.33%;
+    height: 200px;
+}
+
+.T2IDivColumnImageContent {
+    width: 100%;
+    height: 200px;
+}
+
+.T2IDivColumnButtonContent {
+    float: right;
+}
+
+.T2IDivColumnText {
+    width: 100%;
+    height: 200px;
+}
+
+#T2ITextArea {
+    width: 95%;
+    height: 95%;
+}
+
+#T2IDiv {
+    margin: 0 auto;
+    max-width: 600px;
+    max-height: 400px;
+}
+
+#imageFileInput {
+    display: none;
+}

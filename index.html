@@ -2,16 +2,91 @@
 <html lang="en-US">
   <head>
     <meta charset="UTF-8" />
-    <title>Image Shower</title>
+    <title>Steganography Tools</title>
+    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
-    <div>
-      <input id="imageFileInput" type="file" accept="image/png" />
+
+    <input id="imageFileInput" type="file" accept="image/png" />
+    <canvas id="imageCanvas"></canvas>
+
+    <div id="T2IDiv">
+
+      <div id="T2IDivName">
+        <h2>Hide text into least significative bit of image</h2>
+      </div>
+
+      <div id="T2IDivTable" class="divTable">
+
+        <div class="divColumn">
+          <div class="T2IDivColumnImageContent">
+            <img id="T2IBeforeImage" />
+          </div>
+          <div class="T2IDivColumnButtonContent">
+            <input type="button" id="T2ISelectButton" value="Select Image"/>
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="T2IDivColumnText">
+            <textarea id="T2ITextArea"></textarea>
+          </div>
+          <div class="T2IDivColumnButtonContent">
+            <input type="button" id="T2IHideTextButton" value="Hide text"/>
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="T2IDivColumnImageContent">
+            <a id="T2IDowloadLink" download="output_image">
+              <img id="T2IAfterImage" />
+            </a>
+          </div>
+        </div>
+
+      </div>
+
     </div>
-    <div>
-      <canvas id="imageCanvas"></canvas>
+
+    <div id="I2TDiv">
+
+      <div id="I2TDivName">
+        <h2>Show text hidden into least significative bit of image</h2>
+      </div>
+
+      <div id="I2TDivTable" class="divTable">
+
+        <div class="divColumn">
+          <div class="I2TDivColumnImageContent">
+            <img id="I2TBeforeImage" />
+          </div>
+          <div class="I2TDivColumnButtonContent">
+            <input type="button" id="I2TSelectButton" value="Select Image"/>
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="I2TDivColumnText">
+            <textarea id="I2TTextArea"></textarea>
+          </div>
+          <div class="I2TDivColumnButtonContent">
+            <input type="button" id="I2THideTextButton" value="Show text"/>
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="I2TDivColumnImageContent">
+            <a id="DowloadLink" download="output_image">
+              <img id="T2IAfterImage" />
+            </a>
+          </div>
+        </div>
+
+      </div>
+
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>
