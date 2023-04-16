@@ -8,13 +8,13 @@
 
   <body>
 
-    <input id="imageFileInput" type="file" accept="image/png" />
-    <canvas id="imageCanvas"></canvas>
-
     <div id="T2IDiv">
+      
+      <input id="T2IImageFileInput" type="file" accept="image/png" />
+      <canvas id="T2IImageCanvas"></canvas>
 
       <div id="T2IDivName">
-        <h2>Hide text into least significative bit of image</h2>
+        <h2>Hide text into LSB of image</h2>
       </div>
 
       <div id="T2IDivTable" class="divTable">
@@ -51,8 +51,11 @@
 
     <div id="I2TDiv">
 
+      <input id="I2TImageFileInput" type="file" accept="image/png" />
+      <canvas id="I2TImageCanvas"></canvas>
+
       <div id="I2TDivName">
-        <h2>Show text hidden into least significative bit of image</h2>
+        <h2>Show text hidden into LSB of image</h2>
       </div>
 
       <div id="I2TDivTable" class="divTable">
@@ -71,16 +74,11 @@
             <textarea id="I2TTextArea"></textarea>
           </div>
           <div class="I2TDivColumnButtonContent">
-            <input type="button" id="I2THideTextButton" value="Show text"/>
+            <input type="button" id="I2TShowTextButton" value="Show text"/>
           </div>
         </div>
 
         <div class="divColumn">
-          <div class="I2TDivColumnImageContent">
-            <a id="DowloadLink" download="output_image">
-              <img id="T2IAfterImage" />
-            </a>
-          </div>
         </div>
 
       </div>

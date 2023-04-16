@@ -43,6 +43,35 @@ canvas {
     max-height: 400px;
 }
 
-#imageFileInput {
+.I2TDivColumnImageContent {
+    width: 100%;
+    height: 200px;
+}
+
+.I2TDivColumnButtonContent {
+    float: right;
+}
+
+.I2TDivColumnText {
+    width: 100%;
+    height: 200px;
+}
+
+#I2TTextArea {
+    width: 95%;
+    height: 95%;
+}
+
+#I2TDiv {
+    margin: 0 auto;
+    max-width: 600px;
+    max-height: 400px;
+}
+
+#T2IImageFileInput {
+    display: none;
+}
+
+#I2TImageFileInput {
     display: none;
 }
