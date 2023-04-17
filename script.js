@@ -31,7 +31,6 @@ function putImageInCanvas() {
     canvasElement.width = this.width;
     const context = canvasElement.getContext("2d");
     context.drawImage(this, 0, 0);
-    console.log(context.getImageData(0, 0, canvasElement.width, canvasElement.height).data);
 }
 
 function putTextIntoImage() {
@@ -39,8 +38,6 @@ function putTextIntoImage() {
     const canvasElement = document.getElementById("T2IImageCanvas");
     const context = canvasElement.getContext("2d");
     const imageData = context.getImageData(0, 0, canvasElement.width, canvasElement.height);
-    console.log("Start");
-    console.log(imageData.data);
 
     // Get text from T2ITextArea and UTF-8 encode it.
     const textInputElement = document.getElementById("T2ITextArea");
@@ -48,7 +45,6 @@ function putTextIntoImage() {
     const textEncoder = new TextEncoder();
     const textStringEncoded = textEncoder.encode(textString);
 
-    console.log(textStringEncoded);
     
     // Check if image is big enough to hold text
     imageDataAvailabeMemory = 3 * imageData.width * imageData.height;
@@ -84,7 +80,6 @@ function putTextIntoImage() {
     outputContext.putImageData(imageData, 0, 0);
     outputImageURL = outputCanvas.toDataURL();
 
-    console.log(outputContext.getImageData(0,0,outputCanvas.width,outputCanvas.height).data)
 
     // Show image
     const T2IAfterImage = document.getElementById("T2IAfterImage");
@@ -139,7 +134,6 @@ function I2TPutImageInCanvas() {
     canvasElement.width = this.width;
     const context = canvasElement.getContext("2d");
     context.drawImage(this, 0, 0);
-    console.log(context.getImageData(0, 0, canvasElement.width, canvasElement.height).data);
 }
 
 function showText() {
@@ -147,7 +141,6 @@ function showText() {
     const canvasElement = document.getElementById("I2TImageCanvas");
     const context = canvasElement.getContext("2d");
     const imageData = context.getImageData(0, 0, canvasElement.width, canvasElement.height);
-    console.log(imageData.data)
 
     const bytes = [];
     let currentByte = 0;
@@ -165,11 +158,8 @@ function showText() {
         }
     }
     const utf8Bytes = new Uint8ClampedArray(bytes);
-    console.log(bytes);
-    console.log(utf8Bytes);
     const textDecoder = new TextDecoder();
     const textStringDecoded = textDecoder.decode(utf8Bytes);
-    console.log(textStringDecoded)
 
     const I2TTextArea = document.getElementById("I2TTextArea");
     I2TTextArea.value = textStringDecoded;
@@ -226,7 +216,6 @@ function I2IShowImage2() {
     const imageFile = this.files[0];
     const imageURL = window.URL.createObjectURL(imageFile);
 
-    console.log("Teste");
 
     // Activate putImageInCanvas Event Listener
     I2IImage2.src = imageURL;
@@ -244,7 +233,6 @@ function I2IPutImageInCanvas1() {
     canvasElement.width = this.width;
     const context = canvasElement.getContext("2d");
     context.drawImage(this, 0, 0);
-    console.log(context.getImageData(0, 0, canvasElement.width, canvasElement.height).data);
 }
 
 function I2IPutImageInCanvas2() {
@@ -253,7 +241,6 @@ function I2IPutImageInCanvas2() {
     canvasElement.width = this.width;
     const context = canvasElement.getContext("2d");
     context.drawImage(this, 0, 0);
-    console.log(context.getImageData(0, 0, canvasElement.width, canvasElement.height).data);
 }
 
 function joinImages() {
