@@ -1,37 +1,51 @@
-const T2IImageInputElement = document.getElementById("T2IImageFileInput");
-T2IImageInputElement.addEventListener("change", T2IShowImage, false);
+function clickInput(buttonID) {
+    function _clickInput() {
+        const inputButton = document.getElementById(buttonID);
+        inputButton.click();
+    }
+    return _clickInput;
+}
+
+function showImage(imageObject, imageID) {
+    function _showImage() {
+        // Get image to use as medium for message
+        const imageFile = this.files[0];
+        const imageURL = window.URL.createObjectURL(imageFile);
+
+        // Activate putImageInCanvas Event Listener
+        imageObject.src = imageURL;
+
+        // Show image in img tag
+        const shownImage = document.getElementById(imageID);
+        shownImage.src = imageURL;
+        shownImage.width = 200;
+        shownImage.height = 200;
+    }
+    return _showImage;
+}
+
+function putImageInCanvas(canvasID) {
+    function _putImageInCanvas() {
+        const canvasElement = document.getElementById(canvasID);
+        canvasElement.height = this.height;
+        canvasElement.width = this.width;
+        const context = canvasElement.getContext("2d");
+        context.drawImage(this, 0, 0);
+    }
+    return _putImageInCanvas;
+}
 
 const T2IImage = new Image();
-T2IImage.addEventListener("load", putImageInCanvas, false);
+T2IImage.addEventListener("load", putImageInCanvas("T2IImageCanvas"), false);
+
+const T2IImageInputElement = document.getElementById("T2IImageFileInput");
+T2IImageInputElement.addEventListener("change", showImage(T2IImage, "T2IBeforeImage"), false);
 
 const T2ISelectButton = document.getElementById("T2ISelectButton");
-T2ISelectButton.addEventListener("click", T2IClickInput, false);
+T2ISelectButton.addEventListener("click", clickInput("T2IImageFileInput"), false);
 
 const T2IHideButton = document.getElementById("T2IHideTextButton")
 T2IHideButton.addEventListener("click", putTextIntoImage, false);
-
-function T2IShowImage() {
-    // Get image to use as medium for message
-    const imageFile = this.files[0];
-    const imageURL = window.URL.createObjectURL(imageFile);
-
-    // Activate putImageInCanvas Event Listener
-    T2IImage.src = imageURL;
-
-    // Show image
-    const T2IBeforeImage = document.getElementById("T2IBeforeImage");
-    T2IBeforeImage.src = imageURL;
-    T2IBeforeImage.width = 200;
-    T2IBeforeImage.height = 200;
-}
-
-function putImageInCanvas() {
-    const canvasElement = document.getElementById("T2IImageCanvas");
-    canvasElement.height = this.height;
-    canvasElement.width = this.width;
-    const context = canvasElement.getContext("2d");
-    context.drawImage(this, 0, 0);
-}
 
 function putTextIntoImage() {
     // Get ImageData from canvas
@@ -91,50 +105,19 @@ function putTextIntoImage() {
     T2IDowloadLink.href = outputImageURL;
 }
 
-function T2IClickInput() {
-    T2IImageInputElement.click();
-}
-
 // From here on, it's I2T territory
 
+const I2TImage = new Image();
+I2TImage.addEventListener("load", putImageInCanvas("I2TImageCanvas"), false);
+
 const I2TSelectButton = document.getElementById("I2TSelectButton");
-I2TSelectButton.addEventListener("click", I2TClickInput, false);
+I2TSelectButton.addEventListener("click", clickInput("I2TImageFileInput"), false);
 
 const I2TImageInputElement = document.getElementById("I2TImageFileInput");
-I2TImageInputElement.addEventListener("change", I2TShowImage, false);
-
-const I2TImage = new Image();
-I2TImage.addEventListener("load", I2TPutImageInCanvas, false);
+I2TImageInputElement.addEventListener("change", showImage(I2TImage, "I2TBeforeImage"), false);
 
 const I2TShowButton = document.getElementById("I2TShowTextButton");
 I2TShowButton.addEventListener("click", showText, false);
-
-function I2TClickInput() {
-    I2TImageInputElement.click();
-}
-
-function I2TShowImage() {
-    // Get image to use as medium for message
-    const imageFile = this.files[0];
-    const imageURL = window.URL.createObjectURL(imageFile);
-
-    // Activate putImageInCanvas Event Listener
-    I2TImage.src = imageURL;
-
-    // Show image
-    const I2TBeforeImage = document.getElementById("I2TBeforeImage");
-    I2TBeforeImage.src = imageURL;
-    I2TBeforeImage.width = 200;
-    I2TBeforeImage.height = 200;
-}
-
-function I2TPutImageInCanvas() {
-    const canvasElement = document.getElementById("I2TImageCanvas");
-    canvasElement.height = this.height;
-    canvasElement.width = this.width;
-    const context = canvasElement.getContext("2d");
-    context.drawImage(this, 0, 0);
-}
 
 function showText() {
     // Get ImageData from canvas
@@ -167,81 +150,26 @@ function showText() {
 
 // From here on, it's I2I territory
 
+const I2IImage1 = new Image();
+I2IImage1.addEventListener("load", putImageInCanvas("I2IImageCanvas1"), false);
+
+const I2IImage2 = new Image();
+I2IImage2.addEventListener("load", putImageInCanvas("I2IImageCanvas2"), false);
+
 const I2ISelectButton1 = document.getElementById("I2ISelectButton1");
-I2ISelectButton1.addEventListener("click", I2IClickInput1, false);
+I2ISelectButton1.addEventListener("click", clickInput("I2IImageFileInput1"), false);
 
 const I2ISelectButton2 = document.getElementById("I2ISelectButton2");
-I2ISelectButton2.addEventListener("click", I2IClickInput2, false);
+I2ISelectButton2.addEventListener("click", clickInput("I2IImageFileInput2"), false);
 
 const I2IJoinButton= document.getElementById("I2IJoinButton");
 I2IJoinButton.addEventListener("click", joinImages, false);
 
 const I2IImageInputElement1 = document.getElementById("I2IImageFileInput1");
-I2IImageInputElement1.addEventListener("change", I2IShowImage1, false);
+I2IImageInputElement1.addEventListener("change", showImage(I2IImage1, "I2IFirstImage"), false);
 
 const I2IImageInputElement2 = document.getElementById("I2IImageFileInput2");
-I2IImageInputElement2.addEventListener("change", I2IShowImage2, false);
-
-const I2IImage1 = new Image();
-I2IImage1.addEventListener("load", I2IPutImageInCanvas1, false);
-
-const I2IImage2 = new Image();
-I2IImage2.addEventListener("load", I2IPutImageInCanvas2, false);
-
-function I2IClickInput1() {
-    I2IImageInputElement1.click();
-}
-
-function I2IClickInput2() {
-    I2IImageInputElement2.click();
-}
-
-function I2IShowImage1() {
-    // Get image to use as medium for message
-    const imageFile = this.files[0];
-    const imageURL = window.URL.createObjectURL(imageFile);
-
-    // Activate putImageInCanvas Event Listener
-    I2IImage1.src = imageURL;
-
-    // Show image
-    const I2IFirstImage = document.getElementById("I2IFirstImage");
-    I2IFirstImage.src = imageURL;
-    I2IFirstImage.width = 200;
-    I2IFirstImage.height = 200;
-}
-
-function I2IShowImage2() {
-    // Get image to use as medium for message
-    const imageFile = this.files[0];
-    const imageURL = window.URL.createObjectURL(imageFile);
-
-
-    // Activate putImageInCanvas Event Listener
-    I2IImage2.src = imageURL;
-
-    // Show image
-    const I2ISecondImage = document.getElementById("I2ISecondImage");
-    I2ISecondImage.src = imageURL;
-    I2ISecondImage.width = 200;
-    I2ISecondImage.height = 200;
-}
-
-function I2IPutImageInCanvas1() {
-    const canvasElement = document.getElementById("I2IImageCanvas1");
-    canvasElement.height = this.height;
-    canvasElement.width = this.width;
-    const context = canvasElement.getContext("2d");
-    context.drawImage(this, 0, 0);
-}
-
-function I2IPutImageInCanvas2() {
-    const canvasElement = document.getElementById("I2IImageCanvas2");
-    canvasElement.height = this.height;
-    canvasElement.width = this.width;
-    const context = canvasElement.getContext("2d");
-    context.drawImage(this, 0, 0);
-}
+I2IImageInputElement2.addEventListener("change", showImage(I2IImage2, "I2ISecondImage"), false);
 
 function joinImages() {
     // Get ImageData from canvas1
@@ -285,44 +213,17 @@ function joinImages() {
 
 // From here on, it's bitplane territory
 
+const bitPlaneImage = new Image();
+bitPlaneImage.addEventListener("load", putImageInCanvas("bitPlaneImageCanvas"), false);
+
 const bitPlaneSelectButton = document.getElementById("bitPlaneSelectButton");
-bitPlaneSelectButton.addEventListener("click", bitPlaneClickInput, false);
+bitPlaneSelectButton.addEventListener("click", clickInput("bitPlaneImageFileInput"), false);
 
 const bitPlaneActivateButton = document.getElementById("bitPlaneActivateButton");
 bitPlaneActivateButton.addEventListener("click", showBitPlane, false);
 
 const bitPlaneImageFileInput = document.getElementById("bitPlaneImageFileInput");
-bitPlaneImageFileInput.addEventListener("change", bitPlaneShowImage, false);
-
-const bitPlaneImage = new Image();
-bitPlaneImage.addEventListener("load", bitPlanePutImageInCanvas, false);
-
-function bitPlaneClickInput() {
-    bitPlaneImageFileInput.click();
-}
-
-function bitPlaneShowImage() {
-    // Get image to use as medium for message
-    const imageFile = this.files[0];
-    const imageURL = window.URL.createObjectURL(imageFile);
-
-    // Activate putImageInCanvas Event Listener
-    bitPlaneImage.src = imageURL;
-
-    // Show image
-    const bitPlaneOriginalImage = document.getElementById("bitPlaneOriginalImage");
-    bitPlaneOriginalImage.src = imageURL;
-    bitPlaneOriginalImage.width = 200;
-    bitPlaneOriginalImage.height = 200;
-}
-
-function bitPlanePutImageInCanvas() {
-    const canvasElement = document.getElementById("bitPlaneImageCanvas");
-    canvasElement.height = this.height;
-    canvasElement.width = this.width;
-    const context = canvasElement.getContext("2d");
-    context.drawImage(this, 0, 0);
-}
+bitPlaneImageFileInput.addEventListener("change", showImage(bitPlaneImage, "bitPlaneOriginalImage"), false);
 
 function showBitPlane() {
     // Get ImageData from canvas
