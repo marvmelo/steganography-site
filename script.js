@@ -295,3 +295,76 @@ function joinImages() {
     const I2IDowloadLink = document.getElementById("I2IDowloadLink");
     I2IDowloadLink.href = outputImageURL;
 }
+
+// From here on, it's bitplane territory
+
+const bitPlaneSelectButton = document.getElementById("bitPlaneSelectButton");
+bitPlaneSelectButton.addEventListener("click", bitPlaneClickInput, false);
+
+const bitPlaneActivateButton = document.getElementById("bitPlaneActivateButton");
+bitPlaneActivateButton.addEventListener("click", showBitPlane, false);
+
+const bitPlaneImageFileInput = document.getElementById("bitPlaneImageFileInput");
+bitPlaneImageFileInput.addEventListener("change", bitPlaneShowImage, false);
+
+const bitPlaneImage = new Image();
+bitPlaneImage.addEventListener("load", bitPlanePutImageInCanvas, false);
+
+function bitPlaneClickInput() {
+    bitPlaneImageFileInput.click();
+}
+
+function bitPlaneShowImage() {
+    // Get image to use as medium for message
+    const imageFile = this.files[0];
+    const imageURL = window.URL.createObjectURL(imageFile);
+
+    // Activate putImageInCanvas Event Listener
+    bitPlaneImage.src = imageURL;
+
+    // Show image
+    const bitPlaneOriginalImage = document.getElementById("bitPlaneOriginalImage");
+    bitPlaneOriginalImage.src = imageURL;
+    bitPlaneOriginalImage.width = 200;
+    bitPlaneOriginalImage.height = 200;
+}
+
+function bitPlanePutImageInCanvas() {
+    const canvasElement = document.getElementById("bitPlaneImageCanvas");
+    canvasElement.height = this.height;
+    canvasElement.width = this.width;
+    const context = canvasElement.getContext("2d");
+    context.drawImage(this, 0, 0);
+}
+
+function showBitPlane() {
+    // Get ImageData from canvas
+    const canvasElement = document.getElementById("bitPlaneImageCanvas");
+    const context = canvasElement.getContext("2d");
+    const imageData = context.getImageData(0, 0, canvasElement.width, canvasElement.height);
+
+    // Create new canvas and an URL for the output image
+    const outputCanvas = document.createElement("canvas");
+    outputCanvas.height = imageData.height;
+    outputCanvas.width = imageData.width;
+    const outputContext = outputCanvas.getContext("2d");
+    outputImageData = outputContext.getImageData(0, 0, outputCanvas.width, outputCanvas.height);
+
+    for (let plane = 0; plane < 8; plane++) {
+        for (let index = 0; index < imageData.data.length; index++) {
+            outputImageData.data[index] = ((imageData.data[index] >> plane) & 1) * 255;
+        }
+        for (let index = 3; index < imageData.data.length; index=index+4) {
+            outputImageData.data[index] = 255;
+        }
+
+        outputContext.putImageData(outputImageData, 0, 0);
+        outputImageURL = outputCanvas.toDataURL();
+
+        const planeImage = document.getElementById(`plane${plane+1}`);
+        planeImage.src = outputImageURL;
+        planeImage.width = 200;
+        planeImage.height = 200;
+
+    }
+}

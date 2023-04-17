@@ -9,13 +9,13 @@ canvas {
 .divTable {
     display: flex;
     width: 600px;
-    height: 210px;
+    height: 230px;
 }
 
 .divColumn {
     float: left;
     width: 33.33%;
-    height: 200px;
+    height: 220px;
 }
 .divColumnImageContent {
     width: 100%;
@@ -24,6 +24,7 @@ canvas {
 
 .divColumnButtonContent {
     float: right;
+    height: 20px;
 }
 
 .divColumnText {
