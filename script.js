@@ -71,13 +71,10 @@ function putTextIntoImage() {
         imageData.data[index+correction] = (imageData.data[index+correction] & 254) + ((textStringEncoded[currentByte] >> currentBit) & 1);
     }
     // Puts a NULL character at the end.
-    correction = 0;
     for (let index = textNeededMemory-8; index < textNeededMemory; index++) {
         correction = Math.floor((index+correction+1)/4);
         imageData.data[index+correction] = (imageData.data[index+correction] & 254);
     }
-    console.log("NULL")
-    console.log(imageData.data)
 
     // Create new canvas and an URL for the output image
     const outputCanvas = document.createElement("canvas");
@@ -168,6 +165,7 @@ function showText() {
         }
     }
     const utf8Bytes = new Uint8ClampedArray(bytes);
+    console.log(bytes);
     console.log(utf8Bytes);
     const textDecoder = new TextDecoder();
     const textStringDecoded = textDecoder.decode(utf8Bytes);
@@ -175,4 +173,125 @@ function showText() {
 
     const I2TTextArea = document.getElementById("I2TTextArea");
     I2TTextArea.value = textStringDecoded;
+}
+
+// From here on, it's I2I territory
+
+const I2ISelectButton1 = document.getElementById("I2ISelectButton1");
+I2ISelectButton1.addEventListener("click", I2IClickInput1, false);
+
+const I2ISelectButton2 = document.getElementById("I2ISelectButton2");
+I2ISelectButton2.addEventListener("click", I2IClickInput2, false);
+
+const I2IJoinButton= document.getElementById("I2IJoinButton");
+I2IJoinButton.addEventListener("click", joinImages, false);
+
+const I2IImageInputElement1 = document.getElementById("I2IImageFileInput1");
+I2IImageInputElement1.addEventListener("change", I2IShowImage1, false);
+
+const I2IImageInputElement2 = document.getElementById("I2IImageFileInput2");
+I2IImageInputElement2.addEventListener("change", I2IShowImage2, false);
+
+const I2IImage1 = new Image();
+I2IImage1.addEventListener("load", I2IPutImageInCanvas1, false);
+
+const I2IImage2 = new Image();
+I2IImage2.addEventListener("load", I2IPutImageInCanvas2, false);
+
+function I2IClickInput1() {
+    I2IImageInputElement1.click();
+}
+
+function I2IClickInput2() {
+    I2IImageInputElement2.click();
+}
+
+function I2IShowImage1() {
+    // Get image to use as medium for message
+    const imageFile = this.files[0];
+    const imageURL = window.URL.createObjectURL(imageFile);
+
+    // Activate putImageInCanvas Event Listener
+    I2IImage1.src = imageURL;
+
+    // Show image
+    const I2IFirstImage = document.getElementById("I2IFirstImage");
+    I2IFirstImage.src = imageURL;
+    I2IFirstImage.width = 200;
+    I2IFirstImage.height = 200;
+}
+
+function I2IShowImage2() {
+    // Get image to use as medium for message
+    const imageFile = this.files[0];
+    const imageURL = window.URL.createObjectURL(imageFile);
+
+    console.log("Teste");
+
+    // Activate putImageInCanvas Event Listener
+    I2IImage2.src = imageURL;
+
+    // Show image
+    const I2ISecondImage = document.getElementById("I2ISecondImage");
+    I2ISecondImage.src = imageURL;
+    I2ISecondImage.width = 200;
+    I2ISecondImage.height = 200;
+}
+
+function I2IPutImageInCanvas1() {
+    const canvasElement = document.getElementById("I2IImageCanvas1");
+    canvasElement.height = this.height;
+    canvasElement.width = this.width;
+    const context = canvasElement.getContext("2d");
+    context.drawImage(this, 0, 0);
+    console.log(context.getImageData(0, 0, canvasElement.width, canvasElement.height).data);
+}
+
+function I2IPutImageInCanvas2() {
+    const canvasElement = document.getElementById("I2IImageCanvas2");
+    canvasElement.height = this.height;
+    canvasElement.width = this.width;
+    const context = canvasElement.getContext("2d");
+    context.drawImage(this, 0, 0);
+    console.log(context.getImageData(0, 0, canvasElement.width, canvasElement.height).data);
+}
+
+function joinImages() {
+    // Get ImageData from canvas1
+    const canvasElement1 = document.getElementById("I2IImageCanvas1");
+    const context1 = canvasElement1.getContext("2d");
+    const imageData1 = context1.getImageData(0, 0, canvasElement1.width, canvasElement1.height);
+    
+    // Get ImageData from canvas2
+    const canvasElement2 = document.getElementById("I2IImageCanvas2");
+    const context2 = canvasElement2.getContext("2d");
+    const imageData2 = context2.getImageData(0, 0, canvasElement2.width, canvasElement2.height);
+
+    // Check if images are compatible
+    if ((canvasElement1.width!=canvasElement2.width) || (canvasElement1.height!=canvasElement2.height)) {
+        alert("Images have different sizes!");
+        return;
+    }
+    
+    // Join images
+    for (let index = 0; index < imageData1.data.length; index++) {
+        imageData1.data[index] = (imageData1.data[index] & 240) + ((imageData2.data[index] & 240) >> 4);
+    }
+
+    // Create new canvas and an URL for the output image
+    const outputCanvas = document.createElement("canvas");
+    outputCanvas.height = imageData1.height;
+    outputCanvas.width = imageData1.width;
+    const outputContext = outputCanvas.getContext("2d");
+    outputContext.putImageData(imageData1, 0, 0);
+    outputImageURL = outputCanvas.toDataURL();
+
+    // Show image
+    const I2IAfterImage = document.getElementById("I2IAfterImage");
+    I2IAfterImage.src = outputImageURL;
+    I2IAfterImage.width = 200;
+    I2IAfterImage.height = 200;
+    
+    const I2IDowloadLink = document.getElementById("I2IDowloadLink");
+    I2IDowloadLink.href = outputImageURL;
 }

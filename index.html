@@ -8,9 +8,9 @@
 
   <body>
 
-    <div id="T2IDiv">
+    <div class="mainDiv" id="T2IDiv">
       
-      <input id="T2IImageFileInput" type="file" accept="image/png" />
+      <input class="imageInput" id="T2IImageFileInput" type="file" accept="image/png" />
       <canvas id="T2IImageCanvas"></canvas>
 
       <div id="T2IDivName">
@@ -20,25 +20,25 @@
       <div id="T2IDivTable" class="divTable">
 
         <div class="divColumn">
-          <div class="T2IDivColumnImageContent">
+          <div class="divColumnImageContent">
             <img id="T2IBeforeImage" />
           </div>
-          <div class="T2IDivColumnButtonContent">
+          <div class="divColumnButtonContent">
             <input type="button" id="T2ISelectButton" value="Select Image"/>
           </div>
         </div>
 
         <div class="divColumn">
-          <div class="T2IDivColumnText">
+          <div class="divColumnText">
             <textarea id="T2ITextArea"></textarea>
           </div>
-          <div class="T2IDivColumnButtonContent">
+          <div class="divColumnButtonContent">
             <input type="button" id="T2IHideTextButton" value="Hide text"/>
           </div>
         </div>
 
         <div class="divColumn">
-          <div class="T2IDivColumnImageContent">
+          <div class="divColumnImageContent">
             <a id="T2IDowloadLink" download="output_image">
               <img id="T2IAfterImage" />
             </a>
@@ -49,9 +49,9 @@
 
     </div>
 
-    <div id="I2TDiv">
+    <div class="mainDiv" id="I2TDiv">
 
-      <input id="I2TImageFileInput" type="file" accept="image/png" />
+      <input class="imageInput" id="I2TImageFileInput" type="file" accept="image/png" />
       <canvas id="I2TImageCanvas"></canvas>
 
       <div id="I2TDivName">
@@ -61,24 +61,153 @@
       <div id="I2TDivTable" class="divTable">
 
         <div class="divColumn">
-          <div class="I2TDivColumnImageContent">
+          <div class="divColumnImageContent">
             <img id="I2TBeforeImage" />
           </div>
-          <div class="I2TDivColumnButtonContent">
+          <div class="divColumnButtonContent">
             <input type="button" id="I2TSelectButton" value="Select Image"/>
           </div>
         </div>
 
         <div class="divColumn">
-          <div class="I2TDivColumnText">
+          <div class="divColumnText">
             <textarea id="I2TTextArea"></textarea>
           </div>
-          <div class="I2TDivColumnButtonContent">
+          <div class="divColumnButtonContent">
             <input type="button" id="I2TShowTextButton" value="Show text"/>
           </div>
         </div>
 
         <div class="divColumn">
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="mainDiv" id="I2IDiv">
+
+      <input class="imageInput" id="I2IImageFileInput1" type="file" accept="image/png" />
+      <input class="imageInput" id="I2IImageFileInput2" type="file" accept="image/png" />
+      <canvas id="I2IImageCanvas1"></canvas>
+      <canvas id="I2IImageCanvas2"></canvas>
+
+      <div id="I2IDivName">
+        <h2>Hide image into image</h2>
+      </div>
+
+      <div id="I2IDivTable" class="divTable">
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <img id="I2IFirstImage" />
+          </div>
+          <div class="divColumnButtonContent">
+            <input type="button" id="I2ISelectButton1" value="Select First Image"/>
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <img id="I2ISecondImage" />
+          </div>
+          <div class="divColumnButtonContent">
+            <input type="button" id="I2ISelectButton2" value="Select Second Image"/>
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <a id="I2IDowloadLink" download="output_image">
+              <img id="I2IAfterImage" />
+            </a>
+          </div>
+          <div class="divColumnButtonContent">
+            <input type="button" id="I2IJoinButton" value="Join Images"/>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="mainDiv" id="bitPlaneDiv">
+
+      <input class="imageInput" id="bitPlaneImageFileInput1" type="file" accept="image/png" />
+      <canvas id="I2IImageCanvasq"></canvas>
+
+      <div id="bitPlaneDivName">
+        <h2>See Image Bitplanes</h2>
+      </div>
+
+      <div class="divTable">
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <img id="bitPlaneFirstImage" />
+          </div>
+          <div class="divColumnButtonContent">
+            <input type="button" id="bitPlaneSelectButton" value="Select Image"/>
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <img id="plane1" />
+          </div>
+          <div class="divColumnButtonContent">
+            <input type="button" id="bitPlaneActivateButton" value="See Bitplane"/>
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <img id="plane2" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="divTable">
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <img id="plane3" />
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <img id="plane4" />
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <img id="plane5" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="divTable">
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <img id="plane6" />
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <img id="plane7" />
+          </div>
+        </div>
+
+        <div class="divColumn">
+          <div class="divColumnImageContent">
+            <img id="plane8" />
+          </div>
         </div>
 
       </div>
